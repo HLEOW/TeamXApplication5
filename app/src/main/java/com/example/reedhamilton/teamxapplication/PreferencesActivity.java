@@ -24,6 +24,8 @@ public class PreferencesActivity extends Activity {
     float schl;
     RatingBar cost;
     float cst;
+    RatingBar salary;
+    float sal;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +47,8 @@ public class PreferencesActivity extends Activity {
                 schl = school.getRating();
                 cost = (RatingBar) findViewById(R.id.tuitionRating);
                 cst = cost.getRating();
+                salary = (RatingBar) findViewById(R.id.salaryRating);
+                sal = salary.getRating();
                 Toast.makeText(PreferencesActivity.this,"Preferences Saved", Toast.LENGTH_LONG).show();
                 Intent boom = new Intent(PreferencesActivity.this, ResultsActivity.class);
                 Bundle my_prefs = new Bundle();
@@ -52,6 +56,7 @@ public class PreferencesActivity extends Activity {
                 my_prefs.putFloat("employment", employ);
                 my_prefs.putFloat("school", schl);
                 my_prefs.putFloat("cost",cst);
+                my_prefs.putFloat("salary",sal);
                 boom.putExtras(my_prefs);
                 startActivity(boom);
             }

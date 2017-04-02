@@ -5,6 +5,8 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+
+
 /**
  * Created by Reed Hamilton on 3/25/2017.
  */
@@ -25,7 +27,7 @@ public class TeamXDBHelper extends SQLiteOpenHelper {
 
 
     public TeamXDBHelper(Context context) {
-        super(context, DATABASE_NAME , null, DATABASE_VERSION);
+        super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
     @Override
@@ -47,7 +49,7 @@ public class TeamXDBHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public boolean insertPerson(String username, String pwd , String name,  String gender, int age, String location, String schoolType, String email) {
+    public boolean insertPerson(String username, String pwd, String name, String gender, int age, String location, String schoolType, String email) {
         SQLiteDatabase db = getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put(PERSON_COLUMN_USERNAME, username);
@@ -59,13 +61,13 @@ public class TeamXDBHelper extends SQLiteOpenHelper {
         contentValues.put(PERSON_COLUMN_SCHOOL, schoolType);
         contentValues.put(PERSON_COLUMN_EMAIL, email);
         long result = db.insert(PERSON_TABLE_NAME, null, contentValues);
-        if (result == -1){
+        if (result == -1) {
             return false;
-        }
-        else {
+        } else {
             return true;
         }
     }
+
     public boolean updatePerson(String username, String pwd, String name, String gender, int age, String location, String schoolType, String email) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
@@ -77,31 +79,31 @@ public class TeamXDBHelper extends SQLiteOpenHelper {
         contentValues.put(PERSON_COLUMN_LOCATION, location);
         contentValues.put(PERSON_COLUMN_SCHOOL, schoolType);
         contentValues.put(PERSON_COLUMN_EMAIL, email);
-        long result = db.update(PERSON_TABLE_NAME, contentValues, PERSON_COLUMN_USERNAME + " = ? ", new String[] { username } );
-        if (result == -1){
+        long result = db.update(PERSON_TABLE_NAME, contentValues, PERSON_COLUMN_USERNAME + " = ? ", new String[]{username});
+        if (result == -1) {
             return false;
-        }
-        else {
+        } else {
             return true;
         }
     }
 
     public boolean getPerson(String id) {
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res = db.rawQuery( "SELECT * FROM " + PERSON_TABLE_NAME + " WHERE " +
-                PERSON_COLUMN_USERNAME + "=?", new String[] { id } );
-        if(res.getCount() <= 0){
+        Cursor res = db.rawQuery("SELECT * FROM " + PERSON_TABLE_NAME + " WHERE " +
+                PERSON_COLUMN_USERNAME + "=?", new String[]{id});
+        if (res.getCount() <= 0) {
             res.close();
             return false;
         }
         res.close();
         return true;
     }
+
     public boolean getPassword(String id) {
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res = db.rawQuery( "SELECT * FROM " + PERSON_TABLE_NAME + " WHERE " +
-                PERSON_COLUMN_PASSWORD + "=?", new String[] { id } );
-        if(res.getCount() <= 0){
+        Cursor res = db.rawQuery("SELECT * FROM " + PERSON_TABLE_NAME + " WHERE " +
+                PERSON_COLUMN_PASSWORD + "=?", new String[]{id});
+        if (res.getCount() <= 0) {
             res.close();
             return false;
         }
@@ -111,7 +113,7 @@ public class TeamXDBHelper extends SQLiteOpenHelper {
 
     public Cursor getAllPersons() {
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res = db.rawQuery( "SELECT * FROM " + PERSON_TABLE_NAME, null );
+        Cursor res = db.rawQuery("SELECT * FROM " + PERSON_TABLE_NAME, null);
         return res;
     }
 }

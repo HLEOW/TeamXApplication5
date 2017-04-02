@@ -67,6 +67,21 @@
         android:layout_marginLeft="30dp"
         />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="95dp"
+        android:text="Salary"
+        android:textSize="20sp" />
+
+    <RatingBar
+        android:id="@+id/salaryRating"
+        style="@style/Widget.AppCompat.RatingBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="30dp"
+        />
+
     <Button
         android:id="@+id/bSavePrefs"
         android:layout_marginTop="40dp"
