@@ -31,7 +31,7 @@ public class PreferencesActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_prefs);
-        save();
+            save();
     }
 
     public void save(){
@@ -49,16 +49,21 @@ public class PreferencesActivity extends Activity {
                 cst = cost.getRating();
                 salary = (RatingBar) findViewById(R.id.salaryRating);
                 sal = salary.getRating();
-                Toast.makeText(PreferencesActivity.this,"Preferences Saved", Toast.LENGTH_LONG).show();
-                Intent boom = new Intent(PreferencesActivity.this, ResultsActivity.class);
-                Bundle my_prefs = new Bundle();
-                my_prefs.putFloat("location", loc);
-                my_prefs.putFloat("employment", employ);
-                my_prefs.putFloat("school", schl);
-                my_prefs.putFloat("cost",cst);
-                my_prefs.putFloat("salary",sal);
-                boom.putExtras(my_prefs);
-                startActivity(boom);
+                if((sal == 0.0) || (employ == 0.0) || (cst == 0.0) || (loc == 0.0) || (schl == 0.0)) {
+                    Toast.makeText(PreferencesActivity.this,"All preferences must be selected", Toast.LENGTH_LONG).show();
+                }
+                else {
+                    Toast.makeText(PreferencesActivity.this, "Preferences Saved ", Toast.LENGTH_LONG).show();
+                    Intent boom = new Intent(PreferencesActivity.this, ResultsActivity.class);
+                    Bundle my_prefs = new Bundle();
+                    my_prefs.putFloat("location", loc);
+                    my_prefs.putFloat("employment", employ);
+                    my_prefs.putFloat("school", schl);
+                    my_prefs.putFloat("cost", cst);
+                    my_prefs.putFloat("salary", sal);
+                    boom.putExtras(my_prefs);
+                    startActivity(boom);
+                }
             }
         });
     }

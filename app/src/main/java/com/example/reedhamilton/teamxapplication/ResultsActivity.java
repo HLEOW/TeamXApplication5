@@ -108,6 +108,7 @@ public class ResultsActivity extends Activity {
         });
     }
 
+
     public void deets() {
         details = (Button) findViewById(R.id.bDeets);
         details.setOnClickListener(new View.OnClickListener() {

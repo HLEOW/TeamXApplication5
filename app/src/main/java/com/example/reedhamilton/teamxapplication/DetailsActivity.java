@@ -43,24 +43,24 @@ public class DetailsActivity extends Activity {
             @Override
             public void onClick(View v) {
                 String u_name = name.getText().toString();
-                int u_age = Integer.parseInt(age.getText().toString());
                 String u_gender = gender.getText().toString();
                 String u_location = location.getText().toString();
                 String u_school = school.getText().toString();
                 String u_email = eMail.getText().toString();
-                Bundle bun = getIntent().getExtras();
-                String user_name = bun.getString("username");
-                String pwd = bun.getString("password");
-
-                boolean u_update = DB.updatePerson(user_name, pwd, u_name, u_gender, u_age, u_location, u_school, u_email);
-                if(u_update == true){
-                    Toast.makeText(DetailsActivity.this,"Details Updated", Toast.LENGTH_LONG).show();
+                if((u_name == null) || (u_gender == "") || (u_location == "") || (u_school == "") || (u_email == "") ||
+                        (age.getText().toString() == "")){
+                    Toast.makeText(DetailsActivity.this,"All fields must be filled.", Toast.LENGTH_LONG).show();
+                }
+                else {
+                    Bundle bun = getIntent().getExtras();
+                    String user_name = bun.getString("username");
+                    String pwd = bun.getString("password");
+                    DB.updatePerson(user_name, pwd, u_name, u_gender, 0, u_location, u_school, u_email);
+                    Toast.makeText(DetailsActivity.this, "Details Updated", Toast.LENGTH_LONG).show();
                     Intent boom = new Intent(DetailsActivity.this, ResultsActivity.class);
                     startActivity(boom);
-                }
-                else{
-                    Toast.makeText(DetailsActivity.this,"Something went wrong", Toast.LENGTH_LONG).show();
-                }
+                    }
+
             }
         });
     }
